@@ -48,7 +48,7 @@ Este projeto foi desenvolvido como parte do Challenge de Ciência de Dados da Al
 ## Organização do Projeto
 
 - `notebooks/`: arquivos de análise e limpeza dos dados
-- `data/`: dataset original e dataset limpo
+- `dados/`: dataset original
 - `relatorio/`: relatório final do projeto em HTML
 - `visualizacoes/`: imagens e gráficos gerados na análise
 
