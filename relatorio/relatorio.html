@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Análise de Evasão de Clientes</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 30px; background-color: #f9f9f9; color: #333; }
+    h1, h2, h3 { color: #0a3d62; }
+    p { margin-bottom: 10px; }
+    ul { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>Análise de Evasão de Clientes (Churn)</h1>
+
+  <h2>1. Objetivo</h2>
+  <p>Identificar padrões associados à evasão de clientes na base da empresa TelecomX, com foco em variáveis contratuais, demográficas e de serviços contratados.</p>
+
+  <h2>2. Dicionário de Dados</h2>
+  <ul>
+    <li><strong>customerID:</strong> Identificação única do cliente</li>
+    <li><strong>Churn:</strong> Se o cliente cancelou (Yes) ou não (No)</li>
+    <li><strong>gender:</strong> Gênero do cliente</li>
+    <li><strong>SeniorCitizen:</strong> Se o cliente é idoso (>= 65 anos)</li>
+    <li><strong>Partner / Dependents:</strong> Presença de parceiro(a) ou dependentes</li>
+    <li><strong>tenure:</strong> Tempo de contrato (em meses)</li>
+    <li><strong>PhoneService, InternetService:</strong> Serviços contratados</li>
+    <li><strong>OnlineSecurity, TechSupport, etc.:</strong> Serviços adicionais</li>
+    <li><strong>Contract:</strong> Tipo de contrato (Mensal, Anual, Bienal)</li>
+    <li><strong>PaymentMethod:</strong> Método de pagamento</li>
+    <li><strong>Charges.Monthly / Charges.Total:</strong> Valores mensais e totais</li>
+  </ul>
+
+  <h2>3. Pré-processamento</h2>
+  <ul>
+    <li>Foram normalizadas estruturas aninhadas do JSON.</li>
+    <li>Valores ausentes em <strong>Charges.Total</strong> foram convertidos para <em>NaN</em> e removidos.</li>
+    <li>Criação da variável <strong>Charges.Diary</strong>, como uma estimativa diária do custo do cliente.</li>
+  </ul>
+
+  <h2>4. Padronização</h2>
+  <ul>
+    <li>Variáveis binárias como <strong>gender</strong>, <strong>Churn</strong>, <strong>Partner</strong> etc., foram convertidas para 0 e 1.</li>
+    <li>Variáveis com 3 categorias, como <strong>MultipleLines</strong> ou <strong>StreamingTV</strong>, foram transformadas em binárias eliminando valores como “No internet service”.</li>
+    <li>As variáveis <strong>Contract</strong> e <strong>PaymentMethod</strong> foram convertidas para dummies (one-hot encoding).</li>
+  </ul>
+
+  <h2>5. Análise Descritiva</h2>
+  <h3>5.1 Variáveis com maior relação com churn</h3>
+  <ul>
+    <li><strong>Tipo de contrato:</strong> Clientes com contrato mensal apresentaram maior proporção de cancelamento.</li>
+    <li><strong>Fatura digital:</strong> A opção por fatura digital esteve associada a maior churn.</li>
+    <li><strong>Serviços adicionais:</strong> Clientes sem segurança online, suporte técnico ou backup tendem a cancelar mais.</li>
+    <li><strong>Forma de pagamento:</strong> Boleto eletrônico está fortemente ligado ao churn, enquanto cartão de crédito ou transferência bancária apresentam churn menor.</li>
+  </ul>
+
+  <h3>5.2 Análise numérica</h3>
+  <ul>
+    <li><strong>Charges.Total:</strong> Clientes que cancelaram têm um gasto total médio inferior ao dos que permaneceram.</li>
+    <li><strong>Charges.Diary:</strong> Clientes com valor diário mais baixo tendem a cancelar mais.</li>
+  </ul>
+
+  <h2>6. Conclusão</h2>
+  <p>O perfil de cliente mais propenso a cancelar:</p>
+  <ul>
+    <li>Contrato mensal</li>
+    <li>Pagamento por boleto eletrônico</li>
+    <li>Sem serviços adicionais como segurança ou suporte</li>
+    <li>Menor valor total gasto</li>
+  </ul>
+  <p>Esse conhecimento pode orientar estratégias de retenção focadas em:</p>
+  <ul>
+    <li>Incentivar migração para contratos anuais ou bienais</li>
+    <li>Oferecer bônus por uso de cartão ou débito automático</li>
+    <li>Melhorar a comunicação sobre os benefícios dos serviços adicionais</li>
+  </ul>
+
+</body>
+</html>
